@@ -3,7 +3,6 @@ package dev.sd.project.service;
 import dev.sd.project.model.User;
 import dev.sd.project.repository.UserRepository;
 import lombok.extern.java.Log;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,7 @@ public class UserService { //create new user & check password -> control model a
         this.passwordEncoder = passwordEncoder;
     }
 
-    public void createUser(String username, String email,String password) throws Exception {
+    public User createUser(String username, String email, String password) throws Exception {
         String encrypPassword = passwordEncoder.encode(password);
         User searchUser = new User();
         searchUser.setUsername(username);
@@ -35,6 +34,7 @@ public class UserService { //create new user & check password -> control model a
         User user = new User(username, email, encrypPassword);
         userRepository.save(user);
         log.log(Level.INFO,"Created user account , User id = "+user.getUserId());
+        return user;
     }
     public boolean checkLogin(String username, String password){
         User foundUser = userRepository.findByUsername(username);

@@ -41,7 +41,7 @@ public class ArticleService {
 
     }
 
-    public void editArticle(String articleId, String title, String content, Set<String> tag) throws Exception {
+    public Article editArticle(String articleId, String title, String content, Set<String> tag) throws Exception {
         Article article = articleRepository.findByArticleId(articleId);
         if (article == null){
             log.log(Level.INFO,"Article Not Found");
@@ -53,6 +53,7 @@ public class ArticleService {
         article.setTag(tag);
 
         articleRepository.save(article);
+        return article;
 
     }
 

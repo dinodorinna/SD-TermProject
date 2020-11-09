@@ -16,15 +16,18 @@ public class SdprojectConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/dashboard","/article","/article/create","" +
-                        "/article/edit","/article/delete").permitAll()
-                .anyRequest().authenticated().and().httpBasic().and().csrf().disable();
+                .antMatchers("/", "/dashboard","/article","/article/create",
+                        "/article/edit","/article/delete", "/static/**").permitAll()
+                .anyRequest().authenticated()
+                .and().httpBasic()
+                .and().csrf().disable();
 
     }
+
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder(5); //round = 5
-
-
     }
+
+
 }

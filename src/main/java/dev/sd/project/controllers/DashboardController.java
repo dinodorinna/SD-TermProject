@@ -31,7 +31,7 @@ public class DashboardController {
         //log.log(Level.INFO, String.valueOf(userService.checkLogin("admin","1234"))); // change object to string
         try {
             User user = userService.createUser("admin", "admin@web.com", "1234");
-            articleService.createArticle(user, "Test Article", "Test Article Content");
+
         } catch (Exception ignored) {}
         return new ModelAndView("dashboard");
 

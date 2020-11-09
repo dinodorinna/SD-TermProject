@@ -8,6 +8,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Set;
 import java.util.logging.Level;
 
 @Service
@@ -20,7 +21,7 @@ public class ArticleService {
         this.articleRepository = articleRepository;
     }
 
-    public void createArticle(User writer, String title, String content) throws Exception {
+    public Article createArticle(User writer, String title, String content, Set<String> tag) throws Exception {
         Article article = new Article();
         article.setWriter(writer);
         article.setTitle(title);
@@ -32,10 +33,45 @@ public class ArticleService {
         article.setPublishDate(new Date());
         article.setFavoriteCount(0);
         article.setVisitorCount(0);
+        article.setTag(tag);
+
+        articleRepository.save(article);
+
+        return article ;
+
+    }
+
+    public void editArticle(String articleId, String title, String content, Set<String> tag) throws Exception {
+        Article article = articleRepository.findByArticleId(articleId);
+        if (article == null){
+            log.log(Level.INFO,"Article Not Found");
+            throw new Exception("Article Not Found");
+        }
+        article.setTitle(title);
+        article.setContent(content);
+        article.setEditDate(new Date());
+        article.setTag(tag);
 
         articleRepository.save(article);
 
     }
+
+    public void deleteArticle(String articleId) throws Exception {
+        Article article = articleRepository.findByArticleId(articleId);
+        if (article == null){
+            log.log(Level.INFO,"Article Not Found");
+            throw new Exception("Article Not Found");
+        }
+        articleRepository.delete(article);
+
+    }
+
+    public void countArticleVisitor(Article article){
+        article.setVisitorCount(article.getVisitorCount()+1);
+        articleRepository.save(article);
+    }
+
+
     
 
 }

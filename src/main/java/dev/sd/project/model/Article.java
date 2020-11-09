@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
+import java.util.Set;
 
 @Data
 @Document(collection = "article")
@@ -33,26 +34,30 @@ public class Article {
     private Date publishDate;
     @Nullable // can null
     @EqualsExclude
-    private Date editeDate;
+    private Date editDate;
+
+    private Set<String> tag;
+
 
     public Article(){}
 
     public Article(String articleId, User writer, String title, String content,
-                   Date publishDate, Date editDate, int favoriteCount, int visitorCount) {
+                   Date publishDate, Date editDate, int favoriteCount, int visitorCount, Set<String> tag) {
         this.articleId = articleId;
         this.writer = writer;
         this.title = title;
         this.content = content;
         this.publishDate = publishDate;
-        this.editeDate = editDate;
+        this.editDate = editDate;
         this.favoriteCount = favoriteCount;
         this.visitorCount = visitorCount;
+        this.tag = tag;
     }
     public String toString() {
         return String.format(
                 "Article[id=%s, writer='%s', title='%s', content='%s'," +
                         "publishDate='%s', editeDate='%s', favoriteCount='%s', visitorCount='%s']",
-                articleId, writer, title, content, publishDate, editeDate, favoriteCount, visitorCount);
+                articleId, writer, title, content, publishDate, editDate, favoriteCount, visitorCount);
     }
 
     }

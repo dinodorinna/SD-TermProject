@@ -1,6 +1,7 @@
 package dev.sd.project.service;
 
 import dev.sd.project.model.User;
+import dev.sd.project.repository.ArticleRepository;
 import dev.sd.project.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,6 +12,8 @@ import org.springframework.data.domain.Example;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.Assert;
 
+import java.util.HashSet;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
@@ -20,9 +23,12 @@ class UserServiceTest {
     private UserRepository mockUserRepository;
     @Mock
     private PasswordEncoder mockPasswordEncoder;
+    @Mock
+    private ArticleRepository mockArticleRepository;
     @BeforeEach
+
     void setUp() {
-        underTest = new UserService(mockUserRepository,mockPasswordEncoder);
+        underTest = new UserService(mockUserRepository,mockPasswordEncoder,mockArticleRepository);
     }
 
     @Test
@@ -44,6 +50,7 @@ class UserServiceTest {
         assertDoesNotThrow( () -> underTest.createUser(username, email, password));
         verify(mockUserRepository, times(1)).save(searchUser);
     }
+
     @Test
     void createUserWithExistUserDetail() {
         String username = "admin";
@@ -69,17 +76,18 @@ class UserServiceTest {
         String username = "admin";
         String password = "1234";
 
-        User returnUser = new User(username,"test@web.com",password);
+        User returnUser = new User(username,"test@web.com",password,new HashSet<>());
        when(mockUserRepository.findByUsername(username)).thenReturn(returnUser);
        when(mockPasswordEncoder.matches(password,password)).thenReturn(true);
        assertTrue(underTest.checkLogin(username,password)); //check ->( true )??
     }
+
     @Test
     void checkLoginWithWrongPassword() {
         String username = "admin";
         String password = "12345";
 
-        User returnUser = new User(username, "test@test.com", "1234");
+        User returnUser = new User(username, "test@test.com", "1234",new HashSet<>());
         when(mockUserRepository.findByUsername(username)).thenReturn(returnUser);
         when(mockPasswordEncoder.matches(password, "1234")).thenReturn(false);
 

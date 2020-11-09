@@ -62,7 +62,6 @@ public class ArticleController {
             }catch (Exception e) {}
         }
 
-
         return new RedirectView("/article/create");
 
 }
@@ -71,6 +70,44 @@ public class ArticleController {
         return new ModelAndView("articleCreateForm");
 
     }
+    @PostMapping ("/edit")
+    public RedirectView editArticle(String articleId,
+                                    String title,
+                                    String content,
+                                    String[] tag){
 
+        try {
+            Article article = articleService.editArticle(articleId,title,content,new HashSet<>(Arrays.asList(tag)));
+            return new RedirectView("/article?id="+articleId);
+        } catch (Exception e) {
+
+            return new RedirectView("/article/edit?id="+articleId);
+        }
+
+    }
+    @GetMapping("/edit")
+    public ModelAndView editArticleForm(@RequestParam(name = "id")String articleId){
+        Article article = articleRepository.findByArticleId(articleId);
+        if (article == null){
+            return new ModelAndView("articleNotFound");
+
+        }
+        ModelAndView articleCreateForm = new ModelAndView("articleCreateForm");
+        articleCreateForm.addObject(article);
+
+        return articleCreateForm;
+
+
+    }
+    @PostMapping("/delete")
+    public ModelAndView deleteArticle(String articleId){
+
+        try {
+            articleService.deleteArticle(articleId);
+            return new ModelAndView("articleRemoved");
+        } catch (Exception e) {
+            return new ModelAndView("articleNotFound");
+        }
+    }
 
 }

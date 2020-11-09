@@ -1,12 +1,109 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <!--/*@thymesVar id="article" type="dev.sd.project.model.Article"*/-->
-    <title th:text="${article.getTitle()}"></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="static/theme.css" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit">
+    <style> body {
+        font-family: 'Kanit', sans-serif;
+        font-size: 48px;
+    }
+    </style>
 </head>
-<body>
-<h1 th:text="${article.getTitle()}"></h1>
-<div th:utext="${article.getContent()}"></div>
+<body >
+<nav class="navbar navbar-light w-100" style="background-color: #e3f2fd;">
+    <a class="navbar-brand" href="#">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSjQT_Dyh40TZUX8jAmuw8rhrs50YB7fh8qcw&amp;usqp=CAU" width="50" height="50">
+    </a>
+    <a>
+        <button type="button" class="btn btn-dark">get started</button>
+    </a>
+</nav>
+<div class="">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-7">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="display-3">Topic</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Desc</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="" style=""><img class="img-fluid d-block rounded-circle float-left" src="https://static.pingendo.com/img-placeholder-3.svg" width="50" height="50"></div>
+                    <div class="p-0 m-0 col-md-3" style="">
+                        <h3 class="img-fluid d-block float-left mt-2 m-0 p-0"><a href="#">Name Name</a></h3>
+                    </div>
+                    <div class="col-md-3 p-0" style="">
+                        <h3 class="m-0 mt-2">1 days ago</h3>
+                    </div>
+                    <div class="col-md-3" style=""></div>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+</div>
+<div class="p-0">
+    <div class="container">
+        <div class="row">
+            <div class="m-0 col-md-2" style="position: fixed;">
+                <div class="row m-0 mx-0 p-0 px-0">
+                    <div class="col-md-12">
+                        <h5 class="" contenteditable="true">เขียนโดย</h5>
+                    </div>
+                </div>
+                <div class="row m-0 mx-0 p-0 px-0">
+                    <div class="col-md-12">
+                        <h5 class=""><i class="fa fa-user fa-fw fa-2x"></i>Name Name</h5>
+                    </div>
+                </div>
+                <div class="row m-0 mx-0 p-0 px-0">
+                    <div class="col-md-12">
+                        <h5 class=""><i class="fa fa-fw fa-link fa-2x"></i>URL</h5>
+                    </div>
+                </div>
+                <div class="row m-0 mx-0 p-0 px-0">
+                    <div class="col-md-12 my-2"><a class="btn btn-primary align-items-center m-0 mx-1" href="#">ติดตาม</a></div>
+                </div>
+                <div class="row m-0 mx-0 p-0 px-0"></div>
+                <div class="row m-0 mx-0 p-0 px-0">
+                    <div class="w-100 m-0 col-md-12" style="">
+                        <h5 class="m-0 w-100"><i class="fa fa-user fa-fw fa-2x"></i>จำนวนคนดู</h5>
+                    </div>
+                </div>
+                <div class="row m-0 mx-0 p-0 px-0">
+                    <div class="col-md-12 m-0">
+                        <h5 class="m-0"><i class="fa fa-fw fa-2x fa-heart"></i>จำนวนคนกดใจ</h5>
+                    </div>
+                </div>
+                <div class="row m-0 mx-0 p-0 px-0 align-items-center">
+                    <div class="btn btn-link align-items-center btn-lg ml-1"><i class="fa fa-heart-o fa-2x text-left" aria-hidden="true"></i></div>
+                </div>
+            </div>
+            <div class="col-md-7 offset-md-3" style="">
+                <div class="row"></div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="display-4" contenteditable="true">Content</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2" style=""></div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
 </body>
+
+</html>
 </html>

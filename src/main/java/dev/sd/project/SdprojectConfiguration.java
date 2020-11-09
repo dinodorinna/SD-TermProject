@@ -16,7 +16,7 @@ public class SdprojectConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/dashboard").permitAll()
+                .antMatchers("/", "/dashboard","/article").permitAll()
                 .anyRequest().authenticated();
 
     }

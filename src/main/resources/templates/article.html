@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!--/*@thymesVar id="article" type="dev.sd.project.model.Article"*/-->
+    <title th:text="${article.getTitle()}"></title>
+</head>
+<body>
+<h1 th:text="${article.getTitle()}"></h1>
+<p th:text="${article.getContent()}"></p>
+</body>
+</html>

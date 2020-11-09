@@ -3,6 +3,7 @@ package dev.sd.project.model;
 import lombok.AccessLevel;
 import lombok.Data;
 
+import lombok.EqualsAndHashCode;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -15,6 +16,7 @@ public class User {
     private String userId;
     private String username;
     private String email;
+    @EqualsAndHashCode.Exclude // compare
     private String password;
 
 

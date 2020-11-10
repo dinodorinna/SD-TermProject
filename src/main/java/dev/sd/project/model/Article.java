@@ -23,6 +23,7 @@ public class Article {
     private User writer;
 
     private String title;
+    private String description;
     private String content;  // ในการเปรียบเทียบ 2 article จำเป็นต้องใช้ writer title content เพื่อดูว่า มันใช่อันเดียวกันมั้ย
                             // เป้าหมายคือไม่ต้องการให้ writer คนเดิม โพส title และ content ซ้ำกัน
 
@@ -41,11 +42,12 @@ public class Article {
 
     public Article(){}
 
-    public Article(String articleId, User writer, String title, String content,
+    public Article(String articleId, User writer, String title,String description, String content,
                    Date publishDate, Date editDate, int favoriteCount, int visitorCount, Set<String> tag) {
         this.articleId = articleId;
         this.writer = writer;
         this.title = title;
+        this.description = description;
         this.content = content;
         this.publishDate = publishDate;
         this.editDate = editDate;
@@ -56,7 +58,7 @@ public class Article {
     public String toString() {
         return String.format(
                 "Article[id=%s, writer='%s', title='%s', content='%s'," +
-                        "publishDate='%s', editeDate='%s', favoriteCount='%s', visitorCount='%s']",
+                        "publishDate='%s', editDate='%s', favoriteCount='%s', visitorCount='%s']",
                 articleId, writer, title, content, publishDate, editDate, favoriteCount, visitorCount);
     }
 

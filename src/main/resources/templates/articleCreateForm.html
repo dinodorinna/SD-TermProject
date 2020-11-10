@@ -8,11 +8,13 @@
 <!--/*@thymesVar id="article" type="dev.sd.project.model.Article"*/-->
 <form method="post" th:action="${article != null} ? '/article/edit' : '/article/create' ">
     <input type="hidden" name="articleId" th:value="${article?.getArticleId()}">
-    <label for="title">Title : :</label><br>
+    <label for="title">Title :</label><br>
     <input type="text" id="title" name="title" th:value="${article?.getTitle()}" required/><br>
-    <label for="content">Content: :</label><br>
+    <label for="title">Description :</label><br>
+    <input type="text" id="description" name="description" th:value="${article?.getDescription()}" required/><br>
+    <label for="content">Content :</label><br>
     <input type="text" id="content" name="content" th:value="${article?.getContent()}" required/><br>
-    <label for="tag">Tag: :</label><br>
+    <label for="tag">Tag :</label><br>
     <input type="text" id="tag" name="tag" th:value="${article?.getTag()}" required/><br>
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 

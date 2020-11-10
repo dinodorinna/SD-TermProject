@@ -48,6 +48,7 @@ public class ArticleController {
 
     @PostMapping("/create")
     public RedirectView createArticle(String title,
+                                      String description,
                                       String content,
                                       String[] tag)  {
         User user = userRepository.findByUserId(userService.getCurrentUserId());
@@ -56,7 +57,7 @@ public class ArticleController {
             log.log(Level.INFO, "User is null");
         } else {
             try {
-                Article article = articleService.createArticle(user,title,content,new HashSet<>(Arrays.asList(tag)));
+                Article article = articleService.createArticle(user,title,description,content,new HashSet<>(Arrays.asList(tag)));
                 return new RedirectView("/article?id="+article.getArticleId());
 
             }catch (Exception e) {}
@@ -65,14 +66,17 @@ public class ArticleController {
         return new RedirectView("/article/create");
 
 }
+
     @GetMapping("/create")
     public ModelAndView createArticleForm(){
         return new ModelAndView("articleCreateForm");
 
     }
+
     @PostMapping ("/edit")
     public RedirectView editArticle(String articleId,
                                     String title,
+                                    String description,
                                     String content,
                                     String[] tag){
         Article article = articleRepository.findByArticleId(articleId);
@@ -81,7 +85,7 @@ public class ArticleController {
         }
 
         try {
-            articleService.editArticle(articleId,title,content,new HashSet<>(Arrays.asList(tag)));
+            articleService.editArticle(articleId,title,description,content,new HashSet<>(Arrays.asList(tag)));
 
             return new RedirectView("/article?id="+articleId);
         } catch (Exception e) {
@@ -90,6 +94,7 @@ public class ArticleController {
         }
 
     }
+    
     @GetMapping("/edit")
     public ModelAndView editArticleForm(@RequestParam(name = "id")String articleId){
         Article article = articleRepository.findByArticleId(articleId);

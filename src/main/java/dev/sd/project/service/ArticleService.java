@@ -21,10 +21,11 @@ public class ArticleService {
         this.articleRepository = articleRepository;
     }
 
-    public Article createArticle(User writer, String title, String content, Set<String> tag) throws Exception {
+    public Article createArticle(User writer, String title,String description, String content, Set<String> tag) throws Exception {
         Article article = new Article();
         article.setWriter(writer);
         article.setTitle(title);
+        article.setDescription(description);
         article.setContent(content);
         if (articleRepository.exists(Example.of(article))){
             log.log(Level.INFO,"Duplicated Article");
@@ -41,7 +42,7 @@ public class ArticleService {
 
     }
 
-    public Article editArticle(String articleId, String title, String content, Set<String> tag) throws Exception {
+    public Article editArticle(String articleId, String title,String description, String content, Set<String> tag) throws Exception {
         Article article = articleRepository.findByArticleId(articleId);
         if (article == null){
             log.log(Level.INFO,"Article Not Found");
@@ -49,6 +50,7 @@ public class ArticleService {
         }
 
         article.setTitle(title);
+        article.setDescription(description);
         article.setContent(content);
         article.setEditDate(new Date());
         article.setTag(tag);

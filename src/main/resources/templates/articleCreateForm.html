@@ -5,21 +5,21 @@
     <title>Article Create Form</title>
 </head>
 <body>
-    <!--/*@thymesVar id="article" type="dev.sd.project.model.Article"*/-->
-    <form method="post" th:action="${article != null} ? '/article/edit' : '/article/create' ">
-        <div th:if="${article == null}">
-            ในอนาคตจะไม่ใช้ userId แล้ว ไม่จำเป็นต้องสร้างช่องให้มัน
-            <label for="userId">UserId : :</label><br>
-            <input type="text" id="userId" name="userId" required/><br>
-        </div>
-        <input type="hidden" name="articleId" th:value="${article?.getArticleId()}">
-        <label for="title">Title : :</label><br>
-        <input type="text" id="title" name="title" th:value="${article?.getTitle()}" required/><br>
-        <label for="content">Content: :</label><br>
-        <input type="text" id="content" name="content" th:value="${article?.getContent()}" required/><br>
-        <label for="tag">Tag: :</label><br>
-        <input type="text" id="tag" name="tag" th:value="${article?.getTag()}" required/><br>
-        <input type="submit" value="Submit" >
-    </form>
+<!--/*@thymesVar id="article" type="dev.sd.project.model.Article"*/-->
+<form method="post" th:action="${article != null} ? '/article/edit' : '/article/create' ">
+    <div th:if="${article == null}">
+        ในอนาคตจะไม่ใช้ userId แล้ว ไม่จำเป็นต้องสร้างช่องให้มัน
+        <label for="userId">UserId : :</label><br>
+        <input type="text" id="userId" name="userId" required/><br>
+    </div>
+    <input type="hidden" name="articleId" th:value="${article?.getArticleId()}">
+    <label for="title">Title : :</label><br>
+    <input type="text" id="title" name="title" th:value="${article?.getTitle()}" required/><br>
+    <label for="content">Content: :</label><br>
+    <input type="text" id="content" name="content" th:value="${article?.getContent()}" required/><br>
+    <label for="tag">Tag: :</label><br>
+    <input type="text" id="tag" name="tag" th:value="${article?.getTag()}" required/><br>
+    <input type="submit" value="Submit" >
+</form>
 </body>
 </html>

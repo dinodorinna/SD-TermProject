@@ -2,12 +2,15 @@ package dev.sd.project.service;
 
 
 import dev.sd.project.model.Article;
+import dev.sd.project.model.SecurityUserDetail;
 import dev.sd.project.model.User;
 import dev.sd.project.repository.ArticleRepository;
 import dev.sd.project.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
-import org.springframework.data.domain.Example;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -22,30 +25,35 @@ public class UserService { //create new user & check password -> control model a
     private final PasswordEncoder passwordEncoder;
     private final ArticleRepository articleRepository;
 
-
-
     public User createUser(String username, String email, String password) throws Exception {
-        String encrypPassword = passwordEncoder.encode(password);
-        User searchUser = new User();
-        searchUser.setUsername(username);
-        searchUser.setEmail(email);
+        String encryptPassword = passwordEncoder.encode(password);
 
-        if (userRepository.exists(Example.of(searchUser))) {
+        if (userRepository.findByUsername(username) != null
+            || userRepository.findByEmail(email) != null) {
             log.log(Level.INFO,"Can not create this user account, User existed");
             throw new Exception("User existed");
         }
 
-        User user = new User(username, email, encrypPassword, new HashSet());
+        User user = new User(username, email, encryptPassword, new HashSet<>());
         userRepository.save(user);
         log.log(Level.INFO,"Created user account , User id = "+user.getUserId());
         return user;
     }
-    public boolean checkLogin(String username, String password){
-        User foundUser = userRepository.findByUsername(username);
-        if(foundUser == null){
-            return false;
+
+    public boolean isLoggedIn() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        return auth.getClass() != AnonymousAuthenticationToken.class;
+    }
+
+    public String getCurrentUserId() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (!isLoggedIn()) {
+            return null;
         }
-        return passwordEncoder.matches(password, foundUser.getPassword());
+
+        return ((SecurityUserDetail )auth.getPrincipal()).getUser().getUserId();
     }
 
     public void addArticleFavorite(String articleId, User user) throws Exception {

@@ -39,7 +39,7 @@ public class DashboardController {
 
     @GetMapping (value = {"/getDashboardLatest"}, produces="application/json")
     @ResponseBody
-    public String dashboardArticle(int page) throws JSONException {
+    public String dashboardLatestArticle(int page) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
 
@@ -48,6 +48,47 @@ public class DashboardController {
             JSONObject o = new JSONObject();
             try {
                 o.put("articleId", article.getArticleId());
+                o.put("title",article.getTitle());
+                o.put("description",article.getDescription());
+                o.put("content",article.getContent());
+                o.put("tag",article.getTag());
+                o.put("publishDate",article.getPublishDate().getTime());
+                o.put("editDate",article.getEditDate().getTime());
+                o.put("favoriteCount",article.getFavoriteCount());
+                o.put("visitorCount",article.getVisitorCount());
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            jsonArray.put(o);
+        });
+
+        jsonObject.put("articles", jsonArray);
+
+        return jsonObject.toString();
+    }
+
+    @GetMapping (value = {"/getDashboardByRank"}, produces="application/json")
+    @ResponseBody
+    public String dashboardArticleByRank(int page) throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+
+        Page<Article> articles = articleService.getArticleByRank(page);
+        articles.forEach(article -> {
+            JSONObject o = new JSONObject();
+            try {
+                o.put("articleId", article.getArticleId());
+                o.put("title",article.getTitle());
+                o.put("description",article.getDescription());
+                o.put("content",article.getContent());
+                o.put("tag",article.getTag());
+                o.put("publishDate",article.getPublishDate().getTime());
+                o.put("editDate",article.getEditDate().getTime());
+                o.put("favoriteCount",article.getFavoriteCount());
+                o.put("visitorCount",article.getVisitorCount());
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }

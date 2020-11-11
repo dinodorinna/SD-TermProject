@@ -95,6 +95,12 @@ public class ArticleService {
         return pages;
     }
 
+    public Page<Article> getArticleByRank(int page){
+        Page<Article> pages = articleRepository.findAll(PageRequest.of(page,15,Sort.by(Sort.Order.desc("Score"))));
+        return pages;
+
+    }
+
 
     
 

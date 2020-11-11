@@ -4,14 +4,11 @@ Copyright:WowThemes.net,https://www.wowthemes.net
 Version:1.0.1
 License: https://www.wowthemes.net/freebies-license/
 */
-body {
-	padding-top:5rem;
-}
 .mainheading {
 	padding:1rem 0rem;
 }
 a {
-	color:#00ab6b;
+	color:#5193b3;
 }
 a,a:hover {
 	transition:all 0.2s;
@@ -41,12 +38,6 @@ section {
 		-webkit-column-count:2;
 		-moz-column-count:2;
 		column-count:2;
-	}
-}
-@media (min-width:992px) {
-	.navbar-toggleable-md .navbar-nav .nav-link {
-		padding-right:.7rem;
-		padding-left:.7rem;
 	}
 }
 .card-columns .card {
@@ -136,9 +127,11 @@ section {
 	overflow:hidden!important;
 }
 span.post-name,span.post-date,span.author-meta {
+	margin-top: 3px;
 	display:inline-block;
 }
 span.post-date,span.post-read {
+	margin-top: 3px;
 	color:rgba(0,0,0,.44);
 }
 span.post-read-more {
@@ -177,9 +170,6 @@ span.post-name a,span.post-read-more a:hover {
 	background:transparent;
 	color:green;
 }
-.mediumnavigation .navbar-brand {
-	font-weight:500;
-}
 .mediumnavigation .dropdown-menu {
 	border:1px solid rgba(0,0,0,0.08);
 	margin:.5rem 0 0;
@@ -192,13 +182,6 @@ span.post-name a,span.post-read-more a:hover {
 	display:inline-block;
 	margin-top:3px;
 	cursor:pointer;
-}
-.mediumnavigation .navbar-brand img {
-	max-height:30px;
-	margin-right:5px;
-}
-.mainheading h1.sitetitle {
-	font-family:Righteous;
 }
 .mainheading h1.posttitle {
 	font-weight:700;

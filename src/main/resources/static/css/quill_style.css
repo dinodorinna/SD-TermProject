@@ -29,11 +29,11 @@
   color: #fff;
   text-decoration: none;
 }
+#editor-container {
+  height: 375px;
+}
 
 img {
   width: 150px;
 }
 
-#editor-container {
-  height: 130px;
-}

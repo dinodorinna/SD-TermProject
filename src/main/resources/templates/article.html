@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit">
-    <link rel="stylesheet" th:href="@{/static/theme.css}" type="text/css">
     <link rel="stylesheet" th:href="@{/static/css/css.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}" type="text/css">
 
     <style> body {
         font-family: 'Kanit', sans-serif;
@@ -19,39 +17,9 @@
 <body>
 <!-- Begin Nav
 ================================================== -->
-<nav class="navbar navbar-toggleable-md navbar-light bg-white fixed-top mediumnavigation">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="container">
-        <!-- Begin Logo -->
-        <a class="navbar-brand" href="index.html">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSjQT_Dyh40TZUX8jAmuw8rhrs50YB7fh8qcw&amp;usqp=CAU">
+<nav
+        th:replace="navbar">
 
-        </a>
-        <!-- End Logo -->
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <!-- Begin Menu -->
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Stories <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="post.html">Post</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="author.html">Author</a>
-                </li>
-            </ul>
-            <!-- End Menu -->
-            <!-- Begin Search -->
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                <span class="search-icon"><svg class="svgIcon-use" width="25" height="25" viewbox="0 0 25 25"><path d="M20.067 18.933l-4.157-4.157a6 6 0 1 0-.884.884l4.157 4.157a.624.624 0 1 0 .884-.884zM6.5 11c0-2.62 2.13-4.75 4.75-4.75S16 8.38 16 11s-2.13 4.75-4.75 4.75S6.5 13.62 6.5 11z"></path></svg></span>
-            </form>
-            <!-- End Search -->
-        </div>
-    </div>
 </nav>
 <!-- End Nav
 ================================================== -->
@@ -101,8 +69,10 @@
                     <div class="col-md-2-m-0">
                         <a href="author.html"><img class="author-thumb" src="https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&amp;d=mm&amp;r=x" alt="Sal"></a>
                     </div>
-                    <div class="col-md-10-m-0">
-                        <span class="post-date" th:text="${#dates.format(article.getPublishDate(), 'dd-MMM-yyyy')}"></span><span class="dot"></span>
+
+                    <div class="col-md-10-m-3">
+                        <br>
+                        <span class="post-date " th:text="${#dates.format(article.getPublishDate(), 'dd MMM yyyy')}"></span><span class="dot"></span>
                         <span class="dot">โดย</span>
                         <a class="h5" href="#" th:text="${article.getWriter().getUsername()}"></a>
                     </div>

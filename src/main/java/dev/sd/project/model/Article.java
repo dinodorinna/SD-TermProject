@@ -39,11 +39,15 @@ public class Article {
 
     private Set<String> tag;
 
+    @EqualsExclude
+    private int score;
+
 
     public Article(){}
 
     public Article(String articleId, User writer, String title,String description, String content,
-                   Date publishDate, Date editDate, int favoriteCount, int visitorCount, Set<String> tag) {
+                   Date publishDate, Date editDate, int favoriteCount, int visitorCount, Set<String> tag,
+                   int score) {
         this.articleId = articleId;
         this.writer = writer;
         this.title = title;
@@ -54,6 +58,7 @@ public class Article {
         this.favoriteCount = favoriteCount;
         this.visitorCount = visitorCount;
         this.tag = tag;
+        this.score = score;
     }
     public String toString() {
         return String.format(

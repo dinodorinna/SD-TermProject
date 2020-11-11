@@ -4,11 +4,13 @@ import dev.sd.project.model.Article;
 import dev.sd.project.model.User;
 import dev.sd.project.repository.ArticleRepository;
 import lombok.extern.java.Log;
-import org.springframework.data.domain.Example;
+import org.springframework.data.domain.*;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 
@@ -35,6 +37,7 @@ public class ArticleService {
         article.setFavoriteCount(0);
         article.setVisitorCount(0);
         article.setTag(tag);
+        article.setScore(1000);
 
         articleRepository.save(article);
 
@@ -72,7 +75,24 @@ public class ArticleService {
 
     public void countArticleVisitor(Article article){
         article.setVisitorCount(article.getVisitorCount()+1);
+        article.setScore(article.getScore()+1);
         articleRepository.save(article);
+    }
+
+    @Scheduled(cron = "@monthly")
+    public void updateScore(){ // ดึงข้อมูลใน DB มาทุกๆ 1 เดือน
+               List<Article> articles = articleRepository.findAll();
+               articles.forEach(article -> {
+                   int newScore = (article.getScore() * 80 / 100);
+                   article.setScore(newScore);
+               });
+        articleRepository.saveAll(articles);
+
+    }
+
+    public Page<Article> getLatestArticle(int page){
+        Page<Article> pages = articleRepository.findAll(PageRequest.of(page,15,Sort.by(Sort.Order.desc("Date"))));
+        return pages;
     }
 
 

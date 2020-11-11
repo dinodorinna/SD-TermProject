@@ -64,6 +64,7 @@ public class UserService { //create new user & check password -> control model a
         }
         article.setFavoriteCount(article.getFavoriteCount()+1);
         user.getFavArticleList().add(article);
+        article.setScore(article.getScore()+1);
         articleRepository.save(article);
         userRepository.save(user);
 

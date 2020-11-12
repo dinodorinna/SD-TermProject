@@ -53,7 +53,10 @@ public class DashboardController {
                 o.put("content",article.getContent());
                 o.put("tag",article.getTag());
                 o.put("publishDate",article.getPublishDate().getTime());
-                o.put("editDate",article.getEditDate().getTime());
+
+                if (article.getEditDate() != null) {
+                    o.put("editDate",article.getEditDate().getTime()); //if editDate null มันจะไม่ส่ง editDateไปด้วย
+                }
                 o.put("favoriteCount",article.getFavoriteCount());
                 o.put("visitorCount",article.getVisitorCount());
 
@@ -85,7 +88,9 @@ public class DashboardController {
                 o.put("content",article.getContent());
                 o.put("tag",article.getTag());
                 o.put("publishDate",article.getPublishDate().getTime());
-                o.put("editDate",article.getEditDate().getTime());
+                if (article.getEditDate() != null) {
+                    o.put("editDate",article.getEditDate().getTime());
+                }
                 o.put("favoriteCount",article.getFavoriteCount());
                 o.put("visitorCount",article.getVisitorCount());
 

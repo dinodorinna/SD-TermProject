@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta th:replace="Header.html" charset="UTF-8">
     <title>Article Not Found</title>
 </head>
 <body>
-<h1>Not Found</h1>
+<nav
+th:replace="navbar.html"
+>
+
+</nav>
+<div class="article-post">
+    <br>
+    <div style="text-align: center">
+        <img src="https://i.ibb.co/7425yMw/Png-Item-119862.png" height="350px" width="350px" a>
+        <br>
+    </div>
+    <h1 align="center" size="90 px">  ERROR 404 : <br> ARTICLE NOT FOUND</h1>
+</div>
+<div></div>
 </body>
 </html>

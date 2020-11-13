@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Articles</title>
+</head>
+<body>
+    <!--/*@thymesVar id="articles" type="java.util.List<dev.sd.project.model.Article>"*/-->
+    <div th:each="article : ${articles}">
+        <p>Title: <span th:text="${article.title}"></span></p>
+    </div>
+
+</body>
+</html>

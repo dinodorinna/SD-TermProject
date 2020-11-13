@@ -1,9 +1,13 @@
 package dev.sd.project.controllers;
 
+import dev.sd.project.model.Article;
+import dev.sd.project.model.SecurityUserDetail;
 import dev.sd.project.model.User;
 import dev.sd.project.repository.UserRepository;
+import dev.sd.project.service.ArticleService;
 import dev.sd.project.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -19,6 +24,7 @@ import java.util.Optional;
 public class UserController {
     private UserRepository userRepository;
     private UserService userService;
+    private ArticleService articleService;
 
     @GetMapping
     public ModelAndView userSetting(Optional<String> currentPasswdIncorrect,Optional<String> passwdMisMatch,
@@ -67,5 +73,15 @@ public class UserController {
             }
         }
 
+    }
+
+    @GetMapping("/myarticle")
+    public ModelAndView articleOfUser(@AuthenticationPrincipal SecurityUserDetail securityUserDetail){
+        ModelAndView view = new ModelAndView("myArticle");
+
+        List<Article> articles = articleService.getArticleFromUser(securityUserDetail.getUser());
+        view.addObject("articles", articles);
+
+        return view;
     }
 }

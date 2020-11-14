@@ -1,10 +1,66 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:position="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/static/css/css.css}" type="text/css">
+<style>
+    div#sidebar{
+        position:fixed;
+    }
+</style>
 </head>
 <body>
-<div>dashboard</div>
+<nav th:include="navbar"></nav>
+<script>
+
+    const  renderArticlesTo = (elem, articles) => {
+
+                $(elem).append(`<h2 class="text-center">Name</h2>`);
+    };
+    $(() => {
+        $.ajax({
+            url: "/getDashboardByRank?page=0",
+            method: "GET",
+        }).done((data) => {
+            console.log(data)
+            $(NameDashboard).append('<h2 class="text-center">' +
+                'Name'+
+                '</h2>');
+        });
+    });
+</script>
+<div class="container">
+    <div class="row ">
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <br>
+                    <img class="img-fluid d-block rounded-circle" src="https://static.pingendo.com/img-placeholder-3.svg"></div>
+            </div>
+            <div class="row">
+                <div id="NameDashboard" name="NameDashboard" class="col-md-12">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 "  >
+                    <ul class="list-group list-group-flush">
+                        <a href="#"><li class="list-group-item"><i class="fa fa-cloud text-primary mr-2"></i>อะไรก็ไม่รู้</li></a>
+                        <a href="#"><li class="list-group-item"><i class="fa fa-cloud text-primary mr-2"></i>อะไรก็ไม่รู้</li></a>
+                        <a href="#"><li class="list-group-item"><i class="fa fa-cloud text-primary mr-2"></i>อะไรก็ไม่รู้</li></a>
+                        <a href="#"><li class="list-group-item"><i class="fa fa-cloud text-primary mr-2"></i>อะไรก็ไม่รู้</li></a>
+                        <a href="#"><li class="list-group-item"><i class="fa fa-cloud text-primary mr-2"></i>อะไรก็ไม่รู้</li></a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="col-md-7" class="col-md-7">
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    <h1 class="text-center" >No more...</h1>
+</div>
+<script type="text/javascript" th:src="@{/static/js/scrollpagination.js}"></script>
 </body>
 </html>

@@ -62,5 +62,29 @@
     <h1 class="text-center" >No more...</h1>
 </div>
 <script type="text/javascript" th:src="@{/static/js/scrollpagination.js}"></script>
+=======
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+    <div>dashboard</div>
+    <div class="rankChart"></div>
+
+    <script>
+        const renderArticlesTo = (elem, articles) => {
+            articles.forEach((article) => {
+                $(elem).append(`ID=${article['articleId']}, title=${article['title']}<br>`);
+            });
+        };
+
+        $(() => {
+            $.ajax({
+                url: "/getDashboardByRank?page=0",
+                method: "GET",
+            }).done((data) => {
+                renderArticlesTo(".rankChart", data['articles']);
+            });
+        });
+    </script>
+</body>
 </body>
 </html>

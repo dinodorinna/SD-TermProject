@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit">
-  <link rel="stylesheet" th:href="@{/static/css/bootstrap_main.css}" type="text/css">
-  <style> nav {
-    font-family: 'Kanit', sans-serif;
-    font-size: 20px;
-  }
-  body {
-    font-family: 'Kanit', sans-serif;
-  }
+  <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}" type="text/css">
+  <style>
+    nav {
+      font-size: 20px;
+    }
+
+    * {
+      font-family: 'Kanit', sans-serif;
+    }
   </style>
 </head>
 
-<body >
+<body>
 <nav class="navbar navbar-expand-md navbar-light shadow-sm border-bottom border-primary">
   <div class="container"> <a class="navbar-brand text-primary align-items-center mx-2" href="#">
     <img src="https://i.ibb.co/WHSpDsm/Untitled-1.png" width="80" height="80" class="d-inline-block align-top" alt=""></a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar4">
@@ -32,8 +32,5 @@
     </div>
   </div>
 </nav>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" crossorigin="anonymous" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"></script>
-<script crossorigin="anonymous" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
-
 </html>

@@ -3,88 +3,242 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <link rel="stylesheet" th:href="@{/static/css/css.css}" type="text/css">
-<style>
-    div#sidebar{
-        position:fixed;
-    }
-</style>
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}" type="text/css">
+    <style>
+        .articleCard {
+            width: 100%;
+            padding: 1rem;
+            float: left;
+        }
+
+        @media (min-width: 768px) {
+            .articleCard {
+                width: 50%;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .articleCard {
+                width: 33.3%;
+            }
+        }
+
+        .renderSection > .articleCard {
+            width: 100%;
+        }
+
+        .articleRank {
+            width: 30px;
+            font-size: 20pt;
+            float: left;
+            margin-right: 1rem;
+        }
+
+        .articleDetails {
+            width: calc(100% - 30px - 1rem);
+            float: left;
+        }
+
+        .renderSection > .articleCard > .articleDetails {
+            width: 70%;
+            float: left;
+        }
+        .renderSection > .articleCard > img {
+            width: 30%;
+            float: left;
+        }
+
+        .articleWriter, .articleTitle, .articleDescription, .articleDate {
+            width: 100%;
+        }
+
+        .articleWriter > a {
+            font-size: 10pt;
+            font-style: italic;
+            color: #222;
+        }
+        .articleTitle > a {
+            font-size: 16pt;
+            line-height: 17pt;
+            color: #000000;
+        }
+        .articleDescription {
+            margin-top: .5rem;
+            font-size: 11pt;
+            line-height: 12pt;
+            font-weight: lighter;
+            color: #555;
+            max-height: 24pt;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .articleDate {
+            margin-top: .5rem;
+            font-size: 10pt;
+            font-weight: lighter;
+            color: #555;
+        }
+
+        .sideRenderSection {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .rankedArticleSection {
+            margin-top: 2rem;
+        }
+        .latestArticleSection {
+            margin-top: 4rem;
+        }
+    </style>
 </head>
+
 <body>
 <nav th:include="navbar"></nav>
-<script>
 
-    const  renderArticlesTo = (elem, articles) => {
 
-                $(elem).append(`<h2 class="text-center">Name</h2>`);
-    };
-    $(() => {
-        $.ajax({
-            url: "/getDashboardByRank?page=0",
-            method: "GET",
-        }).done((data) => {
-            console.log(data)
-            $(NameDashboard).append(`<h2 class="text-center">
-              ${data}
-                </h2>`);
-        });
-    });
-</script>
 <div class="container">
-    <div class="row ">
-        <div class="col-md-3">
-            <div class="row">
-                <div class="col-md-12">
-                    <br>
-                    <img class="img-fluid d-block rounded-circle" src="https://static.pingendo.com/img-placeholder-3.svg"></div>
-            </div>
-            <div class="row">
-                <div id="NameDashboard" name="NameDashboard" class="col-md-12">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 "  >
-                    <ul class="list-group list-group-flush">
-                        <a href="#"><li class="list-group-item"><i class="fa fa-cloud text-primary mr-2"></i>อะไรก็ไม่รู้</li></a>
-                        <a href="#"><li class="list-group-item"><i class="fa fa-cloud text-primary mr-2"></i>อะไรก็ไม่รู้</li></a>
-                        <a href="#"><li class="list-group-item"><i class="fa fa-cloud text-primary mr-2"></i>อะไรก็ไม่รู้</li></a>
-                        <a href="#"><li class="list-group-item"><i class="fa fa-cloud text-primary mr-2"></i>อะไรก็ไม่รู้</li></a>
-                        <a href="#"><li class="list-group-item"><i class="fa fa-cloud text-primary mr-2"></i>อะไรก็ไม่รู้</li></a>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div id="col-md-7" class="col-md-7">
-        </div>
-        <div class="col-md-2"></div>
+    <div class="rankedArticleSection">
+        <h4>Trending on DH</h4>
+        <div class="sideRenderSection"></div>
     </div>
-    <h1 class="text-center" >No more...</h1>
+    <div class="latestArticleSection">
+        <h4>Latest article</h4>
+        <div class="row flex-row-reverse">
+            <div class="col-12 col-md-4 col-lg-6">
+                ทำไรก็ทำ
+            </div>
+            <div class="col-12 col-md-8 col-lg-6 renderSection"></div>
+        </div>
+    </div>
 </div>
-<script type="text/javascript" th:src="@{/static/js/scrollpagination.js}"></script>
-=======
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-</head>
-<body>
-    <div>dashboard</div>
-    <div class="rankChart"></div>
 
-    <script>
-        const renderArticlesTo = (elem, articles) => {
-            articles.forEach((article) => {
-                $(elem).append(`ID=${article['articleId']}, title=${article['title']}<br>`);
-            });
-        };
+<script th:src="@{/static/js/jquery.min.js}"></script>
+<script th:src="@{/static/js/bootstrap.min.js}"></script>
+<script th:src="@{/static/js/moment-with-locales.min.js}"></script>
+<script>
+    let latestArticlePage = 0;
 
-        $(() => {
+    const fetchRankedArticles = () => {
+        return new Promise((resolve, reject) => {
             $.ajax({
                 url: "/getDashboardByRank?page=0",
                 method: "GET",
             }).done((data) => {
-                renderArticlesTo(".rankChart", data['articles']);
+                resolve(data);
+            }).fail(() => {
+                reject();
             });
         });
-    </script>
-</body>
+    };
+
+    const fetchLatestArticles = (page) => {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: `/getDashboardLatest?page=${page}`,
+                method: "GET",
+            }).done((data) => {
+                resolve(data);
+            }).fail(() => {
+                reject();
+            });
+        });
+    };
+
+    const getRankedTemplate = (num, writer, title, desc, date, view, articleId) => {
+        const formattedDate = moment(date).locale('th');
+
+        return `<div class="articleCard">
+                    <div class="articleRank">0${num + 1}</div>
+                    <div class="articleDetails">
+                        <div class="articleWriter"><a href="/me">${writer}</a></div>
+                        <div class="articleTitle"><a href="/article?id=${articleId}">${title}</a></div>
+                        ${desc ? `<div class="articleDescription">${desc}</div>` : ''}
+                        <div class="articleDate">${formattedDate.format('ll')}  ·  View ${view}</div>
+                    </div>
+                </div>`;
+    };
+
+    const getLatestTemplate = (writer, title, desc, date, view, articleId) => {
+        const formattedDate = moment(date).locale('th');
+
+        return `<div class="articleCard">
+                    <div class="articleDetails">
+                        <div class="articleWriter"><a href="/me">${writer}</a></div>
+                        <div class="articleTitle"><a href="/article?id=${articleId}">${title}</a></div>
+                        ${desc ? `<div class="articleDescription">${desc}</div>` : ''}
+                        <div class="articleDate">${formattedDate.format('ll')}  ·  View ${view}</div>
+                    </div>
+                    <img src="https://miro.medium.com/fit/c/200/133/0*i5YvNlFZ1W6uvJq9" class="rounded mx-auto" draggable="false">
+                </div>`;
+    };
+
+    const renderRankedArticles = (articles) => {
+        const rankedSection = $(".rankedArticleSection > .sideRenderSection");
+        for (let i = 0; i < articles.length; i++) {
+            const article = articles[i];
+            const rendered = getRankedTemplate(i, article['writerName'],
+                article['title'], article['description'], article['publishDate'],
+                article['visitorCount'], article['articleId']);
+            rankedSection.append(rendered);
+        }
+    };
+
+    const renderLatestArticles = (articles) => {
+        const latestSection = $(".latestArticleSection > .row > .renderSection");
+        for (let i = 0; i < articles.length; i++) {
+            const article = articles[i];
+            const rendered = getLatestTemplate(article['writerName'],
+                article['title'], article['description'], article['publishDate'],
+                article['visitorCount'], article['articleId']);
+            latestSection.append(rendered);
+        }
+    };
+
+    const showRankedArticles = async () => {
+        let rankedArticles;
+        try {
+            rankedArticles = await fetchRankedArticles();
+        } catch (e) {
+            console.info("Couldn't fetch data from backend or it's just empty");
+            return false;
+        }
+
+        renderRankedArticles(rankedArticles['articles']);
+        return true;
+    };
+
+    const showCurrentPageLatestArticles = async () => {
+        let latestArticle;
+        try {
+            latestArticle = await fetchLatestArticles(latestArticlePage);
+        } catch (e) {
+            console.info("Couldn't fetch data from backend or it's just empty");
+        }
+
+        if (latestArticle['articles'].length === 0) {
+            return false;
+        }
+        latestArticlePage++;
+
+        renderLatestArticles(latestArticle['articles']);
+        return true;
+    };
+
+    $(async () => {
+        await showRankedArticles();
+
+        while (window.innerHeight >= document.body.scrollHeight) {
+            if (!(await showCurrentPageLatestArticles())) {
+                break;
+            }
+        }
+    });
+
+    $(window).scroll(async () => {
+        if ($(document).height() - $(this).height() === $(this).scrollTop()) {
+            await showCurrentPageLatestArticles();
+        }
+    });
+</script>
 </body>
 </html>

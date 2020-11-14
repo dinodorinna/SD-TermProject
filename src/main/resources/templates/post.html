@@ -8,7 +8,7 @@
 <link rel="icon" href="assets/img/favicon.ico">
 <title>Mediumish - A Medium style template by WowThemes.net</title>
 <!-- Bootstrap core CSS -->
-<link href="assets/css/bootstrap.min.css" rel="stylesheet">
+<link th:href="@{/static/css/bootstrap.min.css}" rel="stylesheet">
 <!-- Fonts -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
@@ -99,6 +99,7 @@
 		<div class="col-md-8 col-md-offset-2 col-xs-12">
 			<div class="mainheading">
 
+				<!--/*@thymesVar id="article" type="dev.sd.project.model.Article"*/-->
 				<h1 class="posttitle" th:text="${article.getTitle()}">Titleจ้า</h1>
 
 			</div>
@@ -273,9 +274,11 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-<script src="assets/js/bootstrap.min.js"></script>
+<script th:src="@{/static/js/jquery.min.js}"></script>
+<script th:src="@{/static/js/bootstrap.min.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+		integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+		crossorigin="anonymous"></script>
 <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
 <script src="assets/js/mediumish.js"></script>
 </body>

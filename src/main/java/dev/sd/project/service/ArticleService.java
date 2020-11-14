@@ -91,13 +91,11 @@ public class ArticleService {
     }
 
     public Page<Article> getLatestArticle(int page){
-        Page<Article> pages = articleRepository.findAll(PageRequest.of(page,15,Sort.by(Sort.Order.desc("Date"))));
-        return pages;
+        return articleRepository.findAll(PageRequest.of(page,10,Sort.by(Sort.Order.desc("Date"))));
     }
 
     public Page<Article> getArticleByRank(int page){
-        Page<Article> pages = articleRepository.findAll(PageRequest.of(page,15,Sort.by(Sort.Order.desc("Score"))));
-        return pages;
+        return articleRepository.findAll(PageRequest.of(page,6,Sort.by(Sort.Order.desc("Score"))));
 
     }
 

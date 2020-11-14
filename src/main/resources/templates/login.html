@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" th:href="@{/static/css/bootstrap_main.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit">
 
     <style>
@@ -60,10 +60,7 @@
 
 </style>
 </head>
-<body >
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<body>
 <div class="wrapper">
     <form class="form-signin" action="/login" method="post">
         <h2 class="form-signin-heading">ขอดูบัตรผ่านหน่อยจ้า</h2>
@@ -77,8 +74,11 @@
         </small>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
         <br>
-        <div color:red align="center" th:text="${msg}"></div>
+        <div align="center" th:text="${msg}"></div>
     </form>
 </div>
+
+<script th:src="@{/static/js/jquery.min.js}"></script>
+<script th:src="@{/static/js/bootstrap.min.js}"></script>
 </body>
 </html>

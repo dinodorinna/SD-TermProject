@@ -46,7 +46,7 @@ const  more = (elem, articles) => {
 };
 $(() => {
     $.ajax({
-        url: "/getDashboardByRank?page=0",
+        url: "/getDashboardLatest?page=0",
         method: "GET",
     }).done((data) => {
         renderArticlesTo2(".col-md-7", data['articles']);

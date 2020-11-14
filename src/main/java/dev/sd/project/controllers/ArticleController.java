@@ -2,8 +2,10 @@ package dev.sd.project.controllers;
 
 import dev.sd.project.model.Article;
 import dev.sd.project.model.User;
+import dev.sd.project.model.solr.ArticleSolr;
 import dev.sd.project.repository.ArticleRepository;
 import dev.sd.project.repository.UserRepository;
+import dev.sd.project.repository.solr.ArticleSolrRepository;
 import dev.sd.project.service.ArticleService;
 import dev.sd.project.service.UserService;
 import lombok.AllArgsConstructor;
@@ -21,10 +23,11 @@ import java.util.logging.Level;
 @RequestMapping("/article")
 @AllArgsConstructor
 public class ArticleController {
-    private UserRepository userRepository;
-    private UserService userService;
-    private ArticleRepository articleRepository;
-    private ArticleService articleService;
+    private final UserRepository userRepository;
+    private final UserService userService;
+    private final ArticleRepository articleRepository;
+    private final ArticleService articleService;
+    private final ArticleSolrRepository articleSolrRepository;
 
     @GetMapping
     public ModelAndView articleView(@RequestParam(name = "id", required = false) Optional<String> articleId) {
@@ -58,9 +61,20 @@ public class ArticleController {
         } else {
             try {
                 Article article = articleService.createArticle(user,title,description,content,new HashSet<>(Arrays.asList(tag)));
+
+                ArticleSolr articleSolr = new ArticleSolr();
+                articleSolr.setArticleId(article.getArticleId());
+                articleSolr.setWriterName(article.getWriter().getUsername());
+                articleSolr.setTitle(article.getTitle());
+                articleSolr.setContent(article.getContent());
+
+                articleSolrRepository.save(articleSolr);
+
                 return new RedirectView("/article?id="+article.getArticleId());
 
-            }catch (Exception e) {}
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         return new RedirectView("/article/create");
@@ -87,8 +101,20 @@ public class ArticleController {
         try {
             articleService.editArticle(articleId,title,description,content,new HashSet<>(Arrays.asList(tag)));
 
+            Optional<ArticleSolr> solrOptional = articleSolrRepository.findById(articleId);
+            ArticleSolr articleSolr;
+            articleSolr = solrOptional.orElseGet(ArticleSolr::new);
+
+            articleSolr.setArticleId(article.getArticleId());
+            articleSolr.setWriterName(article.getWriter().getUsername());
+            articleSolr.setTitle(article.getTitle());
+            articleSolr.setContent(article.getContent());
+
+            articleSolrRepository.save(articleSolr);
+
             return new RedirectView("/article?id="+articleId);
         } catch (Exception e) {
+            e.printStackTrace();
 
             return new RedirectView("/article/edit?id="+articleId);
         }
@@ -117,6 +143,8 @@ public class ArticleController {
     public ModelAndView deleteArticle(String articleId){
         Article article = articleRepository.findByArticleId(articleId);
         if (article == null || !userService.getCurrentUserId().equals(article.getWriter().getUserId())){
+            articleSolrRepository.deleteById(articleId);
+
             return new ModelAndView("redirect:/");
         }
 
@@ -124,6 +152,7 @@ public class ArticleController {
             articleService.deleteArticle(articleId);
             return new ModelAndView("articleRemoved");
         } catch (Exception e) {
+            e.printStackTrace();
             return new ModelAndView("articleNotFound");
         }
     }

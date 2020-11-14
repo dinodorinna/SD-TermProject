@@ -69,4 +69,15 @@ public class UserService { //create new user & check password -> control model a
         userRepository.save(user);
 
     }
+    public boolean checkLogin(User user, String password) {
+
+        return passwordEncoder.matches(password, user.getPassword());
+    }
+
+    public void changePassword(User user, String password) {
+        String encryptPassword = passwordEncoder.encode(password);
+        user.setPassword(encryptPassword);
+
+        userRepository.save(user);
+    }
 }

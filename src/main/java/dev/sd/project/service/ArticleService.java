@@ -101,6 +101,10 @@ public class ArticleService {
 
     }
 
+    public List<Article> getArticleFromUser(User user){
+        return articleRepository.findByWriter(user);
+    }
+
 
     
 

@@ -47,7 +47,6 @@ public class DashboardController {
         articles.forEach(article -> {
             JSONObject o = new JSONObject();
             try {
-                o.put("writer", article.getWriter().getUsername());
                 o.put("articleId", article.getArticleId());
                 o.put("title",article.getTitle());
                 o.put("description",article.getDescription());
@@ -83,7 +82,6 @@ public class DashboardController {
         articles.forEach(article -> {
             JSONObject o = new JSONObject();
             try {
-                o.put("writer", article.getWriter().getUsername());
                 o.put("articleId", article.getArticleId());
                 o.put("title",article.getTitle());
                 o.put("description",article.getDescription());

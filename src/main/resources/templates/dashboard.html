@@ -25,9 +25,9 @@
             method: "GET",
         }).done((data) => {
             console.log(data)
-            $(NameDashboard).append('<h2 class="text-center">' +
-                'Name'+
-                '</h2>');
+            $(NameDashboard).append(`<h2 class="text-center">
+              ${data.articles.title}
+                </h2>`);
         });
     });
 </script>

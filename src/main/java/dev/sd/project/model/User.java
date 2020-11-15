@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Data //all data have getter&setter
@@ -25,12 +26,12 @@ public class User {
     private String password;
 
     @DBRef
-    private Set<Article> favArticleList;
+    private List<Article> favArticleList;
 
 
     public User(){} //fetch data from database to JavaObject
 
-    public User(String username, String email, String password, Set<Article> favArticleList) {
+    public User(String username, String email, String password, List<Article> favArticleList) {
         this.username = username;
         this.email = email;
         this.password = password;

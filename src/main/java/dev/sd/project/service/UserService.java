@@ -14,7 +14,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 
 @Service
@@ -34,7 +36,7 @@ public class UserService { //create new user & check password -> control model a
             throw new Exception("User existed");
         }
 
-        User user = new User(username, email, encryptPassword, new HashSet<>());
+        User user = new User(username, email, encryptPassword, new ArrayList<>());
         userRepository.save(user);
         log.log(Level.INFO,"Created user account , User id = "+user.getUserId());
         return user;

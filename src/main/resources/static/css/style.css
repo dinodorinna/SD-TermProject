@@ -94,3 +94,14 @@
 .latestArticleSection {
     margin-top: 4rem;
 }
+
+.article-post img {
+    max-width: 100%;
+    height: auto;
+}
+
+@media (min-width: 1200px) {
+    .container, .container-lg, .container-md, .container-sm, .container-xl {
+        max-width: 1200px;
+    }
+}

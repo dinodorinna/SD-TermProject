@@ -3,6 +3,7 @@ package dev.sd.project.controllers;
 import dev.sd.project.model.Article;
 import dev.sd.project.model.SecurityUserDetail;
 import dev.sd.project.model.User;
+import dev.sd.project.repository.ArticleRepository;
 import dev.sd.project.repository.UserRepository;
 import dev.sd.project.service.ArticleService;
 import dev.sd.project.service.UserService;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -25,6 +27,7 @@ public class UserController {
     private UserRepository userRepository;
     private UserService userService;
     private ArticleService articleService;
+    private ArticleRepository articleRepository;
 
     @GetMapping("/settingEmail")
     public ModelAndView userSettingEmail(Optional<String> currentPasswdIncorrect,Optional<String> passwdMisMatch,
@@ -97,5 +100,29 @@ public class UserController {
         view.addObject("articles", articles);
 
         return view;
+    }
+
+    @GetMapping("/addfav")
+    @ResponseBody
+    public String addToFav(@AuthenticationPrincipal SecurityUserDetail securityUserDetail, String articleId) throws Exception {
+        Article article = articleRepository.findByArticleId(articleId);
+        if (article == null || !userService.isLoggedIn()){
+            return "{\"statusCode\": 403}";
+        }
+
+        userService.addArticleFavorite(articleId, securityUserDetail.getUser());
+        return "{\"statusCode\": 200}";
+    }
+
+    @GetMapping("/rmfav")
+    @ResponseBody
+    public String removeFromFav(@AuthenticationPrincipal SecurityUserDetail securityUserDetail, String articleId) throws Exception {
+        Article article = articleRepository.findByArticleId(articleId);
+        if (article == null || !userService.isLoggedIn()){
+            return "{\"statusCode\": 403}";
+        }
+
+        userService.removeArticleFavorite(articleId, securityUserDetail.getUser());
+        return "{\"statusCode\": 200}";
     }
 }

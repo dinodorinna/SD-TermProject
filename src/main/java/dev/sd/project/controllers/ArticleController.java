@@ -44,6 +44,10 @@ public class ArticleController {
                 String currentUserId = userService.getCurrentUserId();
                 if (currentUserId != null) {
                     isOwner = currentUserId.equals(article.get().getWriter().getUserId());
+
+                    User user = userRepository.findByUserId(userService.getCurrentUserId());
+                    System.out.println(userService.isFavArticle(article.get(), user));
+                    articleModel.addObject("isFav", String.valueOf(userService.isFavArticle(article.get(), user)));
                 }
                 articleModel.addObject("isOwner", isOwner);
 

@@ -69,6 +69,25 @@ public class UserService { //create new user & check password -> control model a
         userRepository.save(user);
 
     }
+
+    public void removeArticleFavorite(String articleId, User user) throws Exception {
+        Article article = articleRepository.findByArticleId(articleId);
+        if (article == null){
+            log.log(Level.INFO,"Article Not Found");
+            throw new Exception("Article Not Found");
+        }
+        article.setFavoriteCount(article.getFavoriteCount()-1);
+        user.getFavArticleList().removeIf(e -> e.getArticleId().contentEquals(article.getArticleId()));
+        article.setScore(article.getScore()-1);
+        articleRepository.save(article);
+        userRepository.save(user);
+
+    }
+
+    public boolean isFavArticle(Article article, User user) {
+        return user.getFavArticleList().stream().anyMatch(e -> e.getArticleId().contentEquals(article.getArticleId()));
+    }
+
     public boolean checkLogin(User user, String password) {
 
         return passwordEncoder.matches(password, user.getPassword());

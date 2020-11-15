@@ -50,6 +50,20 @@
                         </a>
                     </li>
                 </ul>
+                <button class="btn" id="likeBtn" style="padding: 0;">
+                    <p>
+                        Like
+                    </p>
+                    <ul>
+                        <li>
+                            <a th:text="${article.getFavoriteCount()}" id="likeCount">
+                                <br/>
+                            </a>
+                        </li>
+                        <input type="hidden" id="isFav" th:value="${isFav}">
+                        <input type="hidden" id="articleId" th:value="${article.getArticleId()}">
+                    </ul>
+                </button>
             </div>
         </div>
         <!-- End Fixed Left Share -->
@@ -113,5 +127,50 @@
 
 <script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
 <script type="text/javascript" th:src="@{/static/js/bootstrap.min.js}"></script>
+<script type="text/javascript">
+    $(() => {
+        const likeBtn = $('#likeBtn');
+        const likeCount = $('#likeCount');
+        const isFavInput = $('#isFav').val();
+        let isFav = isFavInput === 'true';
+
+        if (isFav) {
+            likeBtn.addClass("btn-success");
+        }
+
+        likeBtn.click(() => {
+            console.info(isFav);
+            if (isFav) {
+                $.ajax({
+                    url: `/me/rmfav?articleId=${$('#articleId').val()}`,
+                    method: "GET",
+                }).done((data) => {
+                    data = JSON.parse(data);
+                    if (data['statusCode'] === 200) {
+                        likeCount.text((+likeCount.text())-1);
+                        likeBtn.removeClass("btn-success");
+                    }
+                }).fail(() => {
+
+                });
+            } else {
+                $.ajax({
+                    url: `/me/addfav?articleId=${$('#articleId').val()}`,
+                    method: "GET",
+                }).done((data) => {
+                    data = JSON.parse(data);
+                    if (data['statusCode'] === 200) {
+                        likeCount.text((+likeCount.text())+1);
+                        likeBtn.addClass("btn-success");
+                    }
+                }).fail(() => {
+
+                });
+            }
+
+            isFav = !isFav;
+        });
+    });
+</script>
 </body>
 </html>

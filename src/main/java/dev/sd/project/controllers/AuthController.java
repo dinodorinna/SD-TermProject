@@ -29,7 +29,7 @@ public class AuthController {
     public ModelAndView loginPage(Optional<String> error, Optional<String> logout, Optional<String> register) {
         ModelAndView view = new ModelAndView("login");
         if (error.isPresent()) {
-            view.addObject("msg", "Username or Password is incorrect");
+            view.addObject("err", "Username or Password is incorrect");
         } else if (logout.isPresent()) {
             view.addObject("msg", "You have been logged out");
         } else if (register.isPresent()) {

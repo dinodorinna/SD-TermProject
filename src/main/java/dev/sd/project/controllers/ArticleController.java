@@ -64,14 +64,16 @@ public class ArticleController {
     public RedirectView createArticle(String title,
                                       String description,
                                       String content,
-                                      String[] tag)  {
+                                      String[] tag,
+                                      String thumbnail)  {
         User user = userRepository.findByUserId(userService.getCurrentUserId());
 
         if (user == null) {
             log.log(Level.INFO, "User is null");
         } else {
             try {
-                Article article = articleService.createArticle(user,title,description,content,new HashSet<>(Arrays.asList(tag)));
+                Article article = articleService.createArticle(user,title,description,content,
+                        new HashSet<>(Arrays.asList(tag)), thumbnail);
 
                 ArticleSolr articleSolr = new ArticleSolr();
                 articleSolr.setArticleId(article.getArticleId());
@@ -103,14 +105,16 @@ public class ArticleController {
                                     String title,
                                     String description,
                                     String content,
-                                    String[] tag){
+                                    String[] tag,
+                                    String thumbnail){
         Article article = articleRepository.findByArticleId(articleId);
         if (article == null || !userService.getCurrentUserId().equals(article.getWriter().getUserId())){
             return new RedirectView("/");
         }
 
         try {
-            articleService.editArticle(articleId,title,description,content,new HashSet<>(Arrays.asList(tag)));
+            articleService.editArticle(articleId,title,description,content,
+                    new HashSet<>(Arrays.asList(tag)), thumbnail);
 
             Optional<ArticleSolr> solrOptional = articleSolrRepository.findById(articleId);
             ArticleSolr articleSolr;

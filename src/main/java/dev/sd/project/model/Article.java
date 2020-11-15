@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -38,6 +39,7 @@ public class Article {
     private Date editDate;
 
     private Set<String> tag;
+    private String thumbnail;
 
     @EqualsExclude
     private int score;
@@ -47,7 +49,7 @@ public class Article {
 
     public Article(String articleId, User writer, String title,String description, String content,
                    Date publishDate, Date editDate, int favoriteCount, int visitorCount, Set<String> tag,
-                   int score) {
+                   int score, String thumbnail) {
         this.articleId = articleId;
         this.writer = writer;
         this.title = title;
@@ -67,6 +69,4 @@ public class Article {
                 articleId, writer, title, content, publishDate, editDate, favoriteCount, visitorCount);
     }
 
-    }
-
-
+}

@@ -74,7 +74,7 @@
                 </div>`;
     };
 
-    const getLatestTemplate = (writer, title, desc, date, view, articleId) => {
+    const getLatestTemplate = (writer, title, desc, date, view, thumbnail, articleId) => {
         const formattedDate = moment(date).locale('th');
 
         return `<div class="articleCard">
@@ -84,7 +84,7 @@
                         ${desc ? `<div class="articleDescription">${desc}</div>` : ''}
                         <div class="articleDate">${formattedDate.format('ll')}  ·  View ${view}</div>
                     </div>
-                    <img src="https://miro.medium.com/fit/c/200/133/0*i5YvNlFZ1W6uvJq9" class="rounded mx-auto" draggable="false">
+                    ${thumbnail ? `<img src="${thumbnail}" class="rounded mx-auto" draggable="false" style="height: 120px;width: 120px;object-fit: cover;">` : ''}
                 </div>`;
     };
 
@@ -105,7 +105,7 @@
             const article = articles[i];
             const rendered = getLatestTemplate(article['writerName'],
                 article['title'], article['description'], article['publishDate'],
-                article['visitorCount'], article['articleId']);
+                article['visitorCount'], article['thumbnail'], article['articleId']);
             latestSection.append(rendered);
         }
     };

@@ -80,7 +80,6 @@
 .articleDate {
     margin-top: .5rem;
     font-size: 10pt;
-    font-weight: lighter;
     color: #555;
 }
 
@@ -98,10 +97,4 @@
 .article-post img {
     max-width: 100%;
     height: auto;
-}
-
-@media (min-width: 1200px) {
-    .container, .container-lg, .container-md, .container-sm, .container-xl {
-        max-width: 1200px;
-    }
 }

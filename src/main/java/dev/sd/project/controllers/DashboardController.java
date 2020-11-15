@@ -46,6 +46,7 @@ public class DashboardController {
                 JSONArray tagArray = new JSONArray();
                 article.getTag().forEach(tagArray::put);
                 o.put("tag", tagArray);
+                o.put("thumbnail", article.getThumbnail());
                 o.put("publishDate",article.getPublishDate().getTime());
                 if (article.getEditDate() != null) {
                     o.put("editDate",article.getEditDate().getTime()); //if editDate null มันจะไม่ส่ง editDateไปด้วย
@@ -84,6 +85,7 @@ public class DashboardController {
                 JSONArray tagArray = new JSONArray();
                 article.getTag().forEach(tagArray::put);
                 o.put("tag", tagArray);
+                o.put("thumbnail", article.getThumbnail());
                 o.put("publishDate",article.getPublishDate().getTime());
                 if (article.getEditDate() != null) {
                     o.put("editDate",article.getEditDate().getTime());

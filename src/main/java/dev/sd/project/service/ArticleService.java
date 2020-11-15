@@ -23,7 +23,7 @@ public class ArticleService {
         this.articleRepository = articleRepository;
     }
 
-    public Article createArticle(User writer, String title,String description, String content, Set<String> tag) throws Exception {
+    public Article createArticle(User writer, String title,String description, String content, Set<String> tag, String thumbnail) throws Exception {
         Article article = new Article();
         article.setWriter(writer);
         article.setTitle(title);
@@ -38,6 +38,7 @@ public class ArticleService {
         article.setVisitorCount(0);
         article.setTag(tag);
         article.setScore(1000);
+        article.setThumbnail(thumbnail);
 
         articleRepository.save(article);
 
@@ -45,7 +46,7 @@ public class ArticleService {
 
     }
 
-    public Article editArticle(String articleId, String title,String description, String content, Set<String> tag) throws Exception {
+    public Article editArticle(String articleId, String title,String description, String content, Set<String> tag, String thumbnail) throws Exception {
         Article article = articleRepository.findByArticleId(articleId);
         if (article == null){
             log.log(Level.INFO,"Article Not Found");
@@ -57,6 +58,7 @@ public class ArticleService {
         article.setContent(content);
         article.setEditDate(new Date());
         article.setTag(tag);
+        article.setThumbnail(thumbnail);
 
         articleRepository.save(article);
         return article;

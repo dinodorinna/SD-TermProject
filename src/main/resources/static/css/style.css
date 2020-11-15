@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500&display=swap');
+
+* {
+    font-family: 'Kanit', sans-serif;
+}
+
+#editor-container {
+    height: 375px;
+    width: auto;
+    /* added these styles */
+    display: block;
+}
+
+.articleCard {
+    width: 100%;
+    padding: 1rem;
+    float: left;
+}
+
+@media (min-width: 768px) {
+    .articleCard {
+        width: 50%;
+    }
+}
+
+@media (min-width: 992px) {
+    .articleCard {
+        width: 33.3%;
+    }
+}
+
+.renderSection > .articleCard {
+    width: 100%;
+}
+
+.articleRank {
+    width: 30px;
+    font-size: 20pt;
+    float: left;
+    margin-right: 1rem;
+}
+
+.articleDetails {
+    width: calc(100% - 30px - 1rem);
+    float: left;
+}
+
+.renderSection > .articleCard > .articleDetails {
+    width: 70%;
+    float: left;
+}
+.renderSection > .articleCard > img {
+    width: 30%;
+    float: left;
+}
+
+.articleWriter, .articleTitle, .articleDescription, .articleDate {
+    width: 100%;
+}
+
+.articleWriter > a {
+    font-size: 10pt;
+    font-style: italic;
+    color: #222;
+}
+.articleTitle > a {
+    font-size: 16pt;
+    line-height: 17pt;
+    color: #000000;
+}
+.articleDescription {
+    margin-top: .5rem;
+    font-size: 11pt;
+    line-height: 12pt;
+    font-weight: lighter;
+    color: #555;
+    max-height: 24pt;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.articleDate {
+    margin-top: .5rem;
+    font-size: 10pt;
+    font-weight: lighter;
+    color: #555;
+}
+
+.sideRenderSection {
+    display: flex;
+    flex-wrap: wrap;
+}
+.rankedArticleSection {
+    margin-top: 2rem;
+}
+.latestArticleSection {
+    margin-top: 4rem;
+}

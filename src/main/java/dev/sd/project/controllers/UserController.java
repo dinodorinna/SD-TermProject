@@ -26,14 +26,14 @@ public class UserController {
     private UserService userService;
     private ArticleService articleService;
 
-    @GetMapping
-    public ModelAndView userSetting(Optional<String> currentPasswdIncorrect,Optional<String> passwdMisMatch,
+    @GetMapping("/settingEmail")
+    public ModelAndView userSettingEmail(Optional<String> currentPasswdIncorrect,Optional<String> passwdMisMatch,
                                     Optional<String> emailError, Optional<String> success){
-        ModelAndView view = new ModelAndView ("userSettingForm");
+        ModelAndView view = new ModelAndView ("userSettingEmailForm");
         if (currentPasswdIncorrect.isPresent()) {
             view.addObject("err", "Current Password is incorrect");
-        }else if (passwdMisMatch.isPresent()) {
-            view.addObject("err", "Both New Password doesn't Match");
+        /*}else if (passwdMisMatch.isPresent()) {
+            view.addObject("err", "Both New Password doesn't Match");*/
         }
         else if (emailError.isPresent()) {
             view.addObject("err", "Email has been used ");
@@ -42,6 +42,20 @@ public class UserController {
         }
         return view;
     }
+    @GetMapping("/settingPassword")
+    public ModelAndView userSettingPassword(Optional<String> currentPasswdIncorrect,Optional<String> passwdMisMatch,
+                                    Optional<String> emailError, Optional<String> success){
+        ModelAndView view = new ModelAndView ("userSettingPasswordForm");
+        if (currentPasswdIncorrect.isPresent()) {
+            view.addObject("err", "Current Password is incorrect");
+        }else if (passwdMisMatch.isPresent()) {
+            view.addObject("err", "Both New Password doesn't Match");
+        }else if (success.isPresent()){
+            view.addObject("msg","Success!!!");
+        }
+        return view;
+    }
+
     @PostMapping("/updateEmail")
     public RedirectView updateEmailPost(String email,String password){
         User user = userRepository.findByUserId(userService.getCurrentUserId());

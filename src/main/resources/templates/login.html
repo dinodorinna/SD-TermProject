@@ -62,8 +62,9 @@
     </style>
 </head>
 <body>
-<div class="wrapper">
-    <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${err != null}">
+<div th:replace="navForLogin :: navLogin"></div>
+    <div class="wrapper">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${err != null}">
         <strong>Oops!!</strong>
         <div th:text="${err}"></div>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -71,14 +72,14 @@
         </button>
     </div>
     <form class="form-signin" action="/login" method="post">
-        <h2 class="form-signin-heading">ขอดูบัตรผ่านหน่อยจ้า</h2>
-        <label for="username">Username</label>
+        <h2 class="form-signin-heading">Sign in</h2>
+        <label for="username">username</label>
         <input type="text" class="form-control"  name="username" id="username" placeholder="UserID" required="" autofocus="" /><br>
-        <label for="password">รหัสผ่าน</label>
+        <label for="password">password</label>
         <input type="password" class="form-control" name="password" id="password" placeholder="Password" required=""/>
         <input  type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <small class="form-text text-muted text-right">
-            <a href="/register">สมัครสมาชิก</a>
+            <a href="/register">register</a>
         </small>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
         <br>

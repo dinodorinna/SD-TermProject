@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Navbar</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navLogin">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <img src="https://i.ibb.co/WHSpDsm/Untitled-1.png" width="80px" height="80px"
+             draggable="false" class="d-inline-block align-top"  alt="Home"/>
+      </a>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <div class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+        </div>
+        <ul class="navbar-nav my-2 my-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item" sec:authorize="isAuthenticated()">
+            <a class="nav-link" href="/article/create">Post Article</a>
+          </li>
+          <li class="nav-item" sec:authorize="isAuthenticated()">
+            <div class="dropdown">
+              <button class="btn btn-link dropdown-toggle" type="button"
+                      id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                      aria-expanded="false" sec:authentication="principal.username"></button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="/me">Your Articles</a>
+                <a class="dropdown-item" href="/me/settingPassword">Change Password</a>
+                <a class="dropdown-item" href="/me/settingEmail">Change Email</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/logout">Logout</a>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item" sec:authorize="isAnonymous()">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+          <li class="nav-item" sec:authorize="isAnonymous()" style="margin-left: .5rem">
+            <a class="btn btn-primary" href="/register">
+              Get Started
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</body>
+</html>

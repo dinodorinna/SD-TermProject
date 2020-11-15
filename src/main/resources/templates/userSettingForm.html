@@ -26,20 +26,8 @@
     </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-md navbar-light shadow-sm border-bottom border-primary">
-    <div class="container"> <a class="navbar-brand text-primary align-items-center mx-2" href="#">
-        <img src="https://i.ibb.co/WHSpDsm/Untitled-1.png" width="80" height="80" class="d-inline-block align-top" alt=""></a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar4">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-        <div class="collapse navbar-collapse" id="navbar4">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item"> <a class="nav-link" href="#" >Stories</a> </li>
-                <li class="nav-item"> <a class="nav-link" href="#">Post</a> </li>
-                <li class="nav-item"> <a class="nav-link" href="#">Author</a> </li>
-            </ul> <a type="button" href="/register" class="btn btn-outline-primary">get started</a>
-        </div>
-    </div>
-</nav>
+    <div th:replace="PageTemplate :: nav"></div>
+
     <div class="container">
         <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${msg != null}">
             <div th:text="${msg}"></div>

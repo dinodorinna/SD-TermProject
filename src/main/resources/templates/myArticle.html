@@ -6,6 +6,8 @@
     <title>My Articles</title>
 </head>
 <body>
+    <div th:replace="PageTemplate :: nav"></div>
+
     <!--/*@thymesVar id="articles" type="java.util.List<dev.sd.project.model.Article>"*/-->
     <div th:each="article : ${articles}">
         <p>Title: <span th:text="${article.title}"></span></p>

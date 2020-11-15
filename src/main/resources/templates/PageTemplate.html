@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -30,13 +30,11 @@
             <div class="dropdown">
               <button class="btn btn-link dropdown-toggle" type="button"
                       id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                      aria-expanded="false">
-                Manneaber
-              </button>
+                      aria-expanded="false" sec:authentication="principal.username"></button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="/me">Your Articles</a>
-                <a class="dropdown-item" href="/me/setting">Change Password</a>
-                <a class="dropdown-item" href="/me/setting">Change Email</a>
+                <a class="dropdown-item" href="/me/settingPassword">Change Password</a>
+                <a class="dropdown-item" href="/me/settingEmail">Change Email</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/logout">Logout</a>
               </div>
@@ -45,7 +43,7 @@
           <li class="nav-item" sec:authorize="isAnonymous()">
             <a class="nav-link" href="/login">Login</a>
           </li>
-          <li class="nav-item" sec:authorize="isAnonymous()">
+          <li class="nav-item" sec:authorize="isAnonymous()" style="margin-left: .5rem">
             <a class="btn btn-primary" href="/register">
               Get Started
             </a>

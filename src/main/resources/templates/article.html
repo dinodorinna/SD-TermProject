@@ -50,11 +50,9 @@
                         </a>
                     </li>
                 </ul>
-                <button class="btn" id="likeBtn" style="padding: 0;">
-                    <p>
-                        Like
-                    </p>
-                    <ul>
+                <button class="btn" id="likeBtn" style="padding: 0 .25rem;">
+                    <p>Like</p>
+                    <ul style="margin-bottom: 0">
                         <li>
                             <a th:text="${article.getFavoriteCount()}" id="likeCount">
                                 <br/>

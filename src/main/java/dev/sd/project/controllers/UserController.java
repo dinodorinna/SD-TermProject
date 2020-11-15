@@ -89,7 +89,7 @@ public class UserController {
 
     }
 
-    @GetMapping("/myarticle")
+    @GetMapping
     public ModelAndView articleOfUser(@AuthenticationPrincipal SecurityUserDetail securityUserDetail){
         ModelAndView view = new ModelAndView("myArticle");
 

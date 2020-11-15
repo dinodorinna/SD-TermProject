@@ -74,13 +74,14 @@
             theme: 'snow'
         });
 
-        const form = document.querySelector('form');
-        form.onsubmit = function() {
-            const about = document.querySelector('input[name=content]');
-            about.value = quill.root.innerHTML;
-        };
+        $('form').submit(() => {
+            const content = $('#content');
+            content.val(quill.root.innerHTML);
+            alert(content.val());
+        });
 
-        quill.root.innerHTML = $('.oldContent').val();
+        const oldContent = $('.oldContent').val();
+        quill.root.innerHTML = oldContent ? oldContent : '';
     });
 </script>
 </body>

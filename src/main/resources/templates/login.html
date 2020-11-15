@@ -62,8 +62,9 @@
     </style>
 </head>
 <body>
-<div class="wrapper">
-    <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${err != null}">
+<div th:replace="navForLogin :: navLogin"></div>
+    <div class="wrapper">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${err != null}">
         <strong>Oops!!</strong>
         <div th:text="${err}"></div>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">

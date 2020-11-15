@@ -30,16 +30,16 @@
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input class="form-control input-lg " id="title" name="title"
-                           type="text" th:value="${article.getTitle()}">
+                           type="text" th:value="${article?.getTitle()}">
                 </div>
 
                 <div class="form-group">
                     <label for="tag">tag</label>
                     <input class="form-control input-lg " id="tag"  name="tag"
-                           type="text" th:value="${article.getTag()}">
+                           type="text" th:value="${article?.getTag()}">
                 </div>
 
-                <input class="oldContent" th:value="${article.getContent()}" type="hidden">
+                <input class="oldContent" th:value="${article?.getContent()}" type="hidden">
 
                 <div class="form-group">
                     <label for="tag">Content</label>

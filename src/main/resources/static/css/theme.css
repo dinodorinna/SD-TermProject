@@ -101,12 +101,7 @@ section {
 	margin-right:13px;
 	border-radius:100%;
 }
-.post-top-meta {
-}
-.post-top-meta .author-thumb {
-	width:72px;
-	height:72px;
-}
+
 .post-top-meta.authorpage .author-thumb {
 	margin-top:40px;
 }

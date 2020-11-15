@@ -34,8 +34,8 @@
 
         <div class="form-group">
             <label for="tag">Tag</label>
-            <input class="form-control input-lg " id="tag"  name="tag"
-                   type="text" th:value="${article?.getTag()}">
+            <input class="form-control input-lg " id="tag" name="tag"
+                   type="text" th:value="${article != null} ? ${#strings.setJoin(article?.getTag(), ', ')} : '' ">
         </div>
 
         <div class="form-group">

@@ -40,6 +40,13 @@ public class ArticleController {
                 ModelAndView articleModel = new ModelAndView("article");
                 articleModel.addObject(article.get());
 
+                boolean isOwner = false;
+                String currentUserId = userService.getCurrentUserId();
+                if (currentUserId != null) {
+                    isOwner = currentUserId.equals(article.get().getWriter().getUserId());
+                }
+                articleModel.addObject("isOwner", isOwner);
+
                 articleService.countArticleVisitor(article.get());
 
                 return articleModel;
@@ -139,8 +146,8 @@ public class ArticleController {
 
 
     }
-    @PostMapping("/delete")
-    public ModelAndView deleteArticle(String articleId){
+    @GetMapping("/delete")
+    public ModelAndView deleteArticle(@RequestParam(name = "id")String articleId){
         Article article = articleRepository.findByArticleId(articleId);
         if (article == null || !userService.getCurrentUserId().equals(article.getWriter().getUserId())){
             articleSolrRepository.deleteById(articleId);

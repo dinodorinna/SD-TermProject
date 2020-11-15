@@ -88,7 +88,7 @@
             about.value = quill.root.innerHTML;
         };
 
-        quill.setHTML($('.oldContent').val());
+        quill.root.innerHTML = $('.oldContent').val();
     });
 </script>
 </body>

@@ -29,7 +29,7 @@
         <div class="form-group">
             <label for="description">Description</label>
             <textarea class="form-control input-lg" id="description" name="description"
-                      th:value="${article?.getDescription()}" rows="2"></textarea>
+                      th:text="${article?.getDescription()}" rows="2"></textarea>
         </div>
 
         <div class="form-group">

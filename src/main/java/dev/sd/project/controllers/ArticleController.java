@@ -154,16 +154,17 @@ public class ArticleController {
 
 
     }
+
     @GetMapping("/delete")
     public ModelAndView deleteArticle(@RequestParam(name = "id")String articleId){
         Article article = articleRepository.findByArticleId(articleId);
         if (article == null || !userService.getCurrentUserId().equals(article.getWriter().getUserId())){
-            articleSolrRepository.deleteById(articleId);
-
             return new ModelAndView("redirect:/");
         }
 
         try {
+            List<ArticleSolr> result = articleSolrRepository.findAllByArticleId(articleId);
+            result.forEach(articleSolrRepository::delete);
             articleService.deleteArticle(articleId);
             return new ModelAndView("articleRemoved");
         } catch (Exception e) {
@@ -172,5 +173,23 @@ public class ArticleController {
         }
     }
 
+    @GetMapping("/rebuiltIndex")
+    @ResponseBody
+    public String rebuildIndex() {
+        articleSolrRepository.deleteAll();
+        List<Article> articles = articleRepository.findAll();
+        List<ArticleSolr> solrList = new ArrayList<>();
+        articles.forEach(e -> {
+            ArticleSolr articleSolr = new ArticleSolr();
+            articleSolr.setArticleId(e.getArticleId());
+            articleSolr.setTitle(e.getTitle());
+            articleSolr.setContent(e.getContent());
+            articleSolr.setWriterName(e.getWriter().getUsername());
 
+            solrList.add(articleSolr);
+        });
+
+        articleSolrRepository.saveAll(solrList);
+        return "OK";
+    }
 }

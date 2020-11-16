@@ -51,7 +51,7 @@
 }
 .renderSection > .articleCard > img {
     width: 30%;
-    float: left;
+    float: right;
 }
 
 .articleWriter, .articleTitle, .articleDescription, .articleDate {

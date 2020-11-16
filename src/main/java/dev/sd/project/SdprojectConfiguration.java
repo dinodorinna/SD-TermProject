@@ -25,7 +25,7 @@ public class SdprojectConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/", "/static/*/**", "/dashboard","/getDashboardLatest",
-                        "/getDashboardByRank","/article", "/login", "/register").permitAll()
+                        "/getDashboardByRank","/article", "/login", "/register", "/search").permitAll()
                 .anyRequest().authenticated()
                 .and()
                     .formLogin()
